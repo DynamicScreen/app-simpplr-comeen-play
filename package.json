@@ -1,0 +1,25 @@
+{
+  "name": "app-simpplr-comeen-play",
+  "version": "0.2.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "author": "Comeen",
+  "dependencies": {
+    "@types/node": "^18.11.9",
+    "file-loader": "^6.2.0",
+    "i18next": "^20.4.0",
+    "moment": "^2.29.4",
+    "sass": "^1.54.9",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "svg-inline-loader": "^0.8.2",
+    "webpack": "^5.50.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.11"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.3"
+  }
+}

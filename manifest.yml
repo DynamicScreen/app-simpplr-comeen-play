@@ -1,0 +1,26 @@
+# YAML
+id: app-simpplr-comeen-play
+name: app.name
+description: app.description
+logo: fak fa-simpplr
+version: 0.2.0
+channel: stable
+api-level: 1
+color: dark-gray
+category:
+author:
+    name: Comeen
+    email: support@comeen.com
+modules:
+    - name: modules.account.name
+      logo: fak fa-simpplr
+      identifier: simpplr-account
+      color: dark-gray
+      type: auth-provider
+      description: modules.account.description
+      options:
+          provider: simpplr
+          vue:
+              options: src/Account/AccountOptions.ts
+          php:
+              handler: \Comeen\Account\Account\AccountHandler

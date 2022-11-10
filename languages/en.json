@@ -1,0 +1,15 @@
+{
+    "app": {
+        "name": "Simpplr",
+        "description": ""
+    },
+    "modules": {
+        "simpplr-account": {
+            "name": "Simpplr account",
+            "description": "",
+            "options": {
+                "user_email": "User email"
+            }
+        }
+    }
+}

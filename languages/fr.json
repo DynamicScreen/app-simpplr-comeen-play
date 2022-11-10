@@ -1,0 +1,15 @@
+{
+    "app": {
+        "name": "Simpplr",
+        "description": ""
+    },
+    "modules": {
+        "account": {
+            "name": "Compte Simpplr",
+            "description": "",
+            "options": {
+                "user_email": "Email de l'utilisateur"
+            }
+        }
+    }
+}
