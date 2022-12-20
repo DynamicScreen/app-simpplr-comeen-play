@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "author": "Comeen",
   "dependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.11",
     "file-loader": "^6.2.0",
     "i18next": "^20.4.0",
     "moment": "^2.29.4",

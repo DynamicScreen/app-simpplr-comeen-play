@@ -93,36 +93,19 @@ class AccountHandler extends OAuthProviderHandler
         return $client;
     }
 
-    public function refreshToken($client = null)
+    public function refreshToken($options = null)
     {
-        if (!Arr::get($this->default_config, 'access_token')) {
-            return [];
-        }
-        if (!$client) {
-            $client = $this->getClient();
-        }
-
-        try {
-            $client->setAccessToken($this->default_config);
-        } catch (\InvalidArgumentException $exception) {
+        if (!Arr::get($options, 'access_token') && !Arr::get($options, 'refresh_token')) {
             return [];
         }
 
-        if ($client->isAccessTokenExpired()) {
-            $refresh_token = $client->getRefreshToken();
+        $client = $this->getClient();
 
-            $new_access = $client->fetchAccessTokenWithRefreshToken($refresh_token);
-            $options = $this->processOptions($new_access);
+        $accessToken = $client->getAccessToken('refresh_token', [
+            'refresh_token' => Arr::get($options, 'refresh_token')
+        ]);
 
-            // Google failed to provide token: auth failed
-            if (!$new_access || !isset($new_access['access_token'])) {
-                return;
-            }
-
-            $client->setAccessToken($new_access);
-        }
-
-        return $client->getAccessToken();
+        return $this->processOptions($accessToken);
     }
 
     public function callSalesforceApi($account, $uri, $method = "GET")
@@ -181,9 +164,11 @@ class AccountHandler extends OAuthProviderHandler
         $data = $this->callSalesforceApi($account, "contents?size=16&filter=latest&sort-by=publishedNewest&site-id=$siteId&status=published&content-sub-type=$type");
         $content = Arr::get($data, 'listOfItems');
 
-        foreach ($content as &$item) {
-            $item["authoredBy"]["img"] = $this->downloadImage($account, $item["authoredBy"]["img"]);
-            $item["img"] = $this->downloadImage($account, $item["img"]);
+        if ($content) {
+            foreach ($content as &$item) {
+                $item["authoredBy"]["img"] = $this->downloadImage($account, $item["authoredBy"]["img"]);
+                $item["img"] = $this->downloadImage($account, $item["img"]);
+            }
         }
 
         return $content;
